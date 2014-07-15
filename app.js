@@ -155,31 +155,46 @@ angular
 		var board = $scope.room.board;
 		/* Extending vertically 
 		** if played on top or bottom row */
-		if (i === 0 || i === board.length-1) {
-			var row = [];
+		if (i <= 1 || i >= board.length-2) {
+			var row = [], row2 = [];
 			/* Create a new line */
 			for (var k = board[0].length - 1; k >= 0; k--) {
 				row.push(' ');
+				row2.push(' ');
 			};
+			var l1 = board.length;
 			/* and add into the board */
-			if (i === 0) {
-				board.unshift(row);
-				/* Push just played cell down */
-				i++;
-			} else board.push(row);
+			switch (i) {
+				case 0:
+					board.unshift(row);
+					/* Push just played cell down */
+					i++;
+				case 1:
+					board.unshift(row2);
+					/* Push just played cell down */
+					i++;
+					break;
+				case l1-1:
+					board.push(row);
+				case l1-2:
+					board.push(row2);
+					break;
+			}
 		}
 		/* Extending horizontally
 		** if played on leftmost or rightmost collumn */
-		if (j === 0) {
+		if (j <= 1) {
 			/* Add new cell on each line */
 			for (var k = board.length - 1; k >= 0; k--) {
 				board[k].unshift(' ');
+				if (j===0) board[k].unshift(' ');
 			};
 			/* Push just played cell to the right */
 			j++;
-		} else if (j === board[0].length-1) {
+		} else if (j >= board[0].length-2) {
 			/* Add new cell on each line */
 			for (var k = board.length - 1; k >= 0; k--) {
+				if (j===board[0].length-1) board[k].push(' ');
 				board[k].push(' ');
 			};
 		}
