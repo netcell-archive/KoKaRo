@@ -19,7 +19,6 @@
   "dependencies": {
     "angular": "~1.2.20",
     "firebase": "~1.0.17",
-    "angular-touch": "~1.2.20",
-    "angular-animate": "~1.2.20"
+    "angular-touch": "~1.2.20"
   }
 }
