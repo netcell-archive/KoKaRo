@@ -1,0 +1,51 @@
+<div class="board" style="width: {{boardWidth()}}px">
+	<div class="row"
+		ng-repeat="row in room.board track by $index"
+		ng-init="i=$index"
+	>
+		<div class="cell animate"
+			ng-repeat="cell in row track by $index"
+			ng-class="{
+				'green': !cellIsEnemy(cell),
+				'red': cellIsEnemy(cell),
+				'just-played': isJustPlayed(i, $index)
+			}"
+			ng-click="cellClick(i, $index)"
+		>
+			<span ng-bind="cell">
+			</span>
+		</div>
+	</div>
+</div>
+
+<div class="title animate" 
+	ng-if="room.board" 
+>
+	<div class="name">
+		KoKaRo
+	</div>
+	<div class="room">
+		<!-- Room Id Input -->
+		ROOM: <input ng-model="roomId" type="text"/>
+		<!-- Room Navigations -->
+		<a ng-click="goToRoom(roomId)">GO</a>
+		<a ng-click="newRoom()">NEW</a>
+		<!-- Share on Facebook -->
+		<a href="{{shareLink()}}" target="_blank">SHARE</a>
+	</div>
+	<div class="turn" ng-class="{'play': onTurn()}">
+		<!-- Turn indicator -->
+		<span ng-if="!room.winner">
+			<span ng-bind="onTurn()?'Your':'Enemy\'s'">
+			</span> turn
+		</span>
+		<!-- Winner indicator -->
+		<span class="result" ng-if="room.winner">
+			You
+			<span ng-bind="haveWon()?'won':'lost'"></span>
+			<span class="new-game" ng-click="newGame()">
+				New Game
+			</div>
+		</span>
+	</div>
+</div>

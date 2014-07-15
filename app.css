@@ -1,0 +1,130 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	background-color: #131313;
+	font-family: "Arial";
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.animate {
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+}
+
+.title {
+	position: fixed;
+	width: 100%;
+	opacity: 0.8;
+	color: #fff;
+	background-color: #000;
+	height: 128px;
+	line-height: 40px;
+	font-size: 18px;
+	top: 0;
+	left: 0;
+	text-align: center;
+}
+
+.room span, .room a {
+	border-bottom: #fff 1px solid;
+	text-decoration: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+.room a:link, .room a:visited, .room a:hover {
+	color: inherit;
+}
+
+.room a:active {
+	background-color: #fff;
+	color: #000;
+}
+
+.room input {
+	border: none;
+	background-color: transparent;
+	outline: 0;
+	font-size: inherit;
+	font-style: italic;
+	color: inherit;
+	width: 70px;
+}
+
+.room input:hover {
+	outline: 0;
+}
+
+.name {
+	font-size: 50px;
+	line-height: 50px;
+	margin-top: 7px;
+}
+
+.turn {
+	line-height: 30px;
+	background-color: red;
+}
+
+.turn.play {
+	background-color: green;
+}
+
+.new-game {
+	margin-left: 10px;
+	color: #000;
+	background-color: #fff;
+	cursor: pointer;
+	padding: 5px;
+}
+
+.board {
+	margin: 0 auto;
+	margin-top: 128px;
+}
+
+.row {
+	height: 50px;
+}
+
+.cell {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	font-size: 30px;
+	line-height: 60px;
+	background-color: #fafafa;
+	border: 1px #aaa solid;
+}
+
+.cell span {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+.cell.just-played {
+	background-color: #ddd;
+}
