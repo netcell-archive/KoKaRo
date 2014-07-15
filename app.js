@@ -239,8 +239,8 @@ angular
 		/* Make a string to check with RegExp */
 		var check = line1.concat(['|'],line2,['|'],line3,['|'],line4).join('');
 		/* Test and return accordingly */
-		if (/ XXXXX |OXXXXX | XXXXXO|XXXXXX/.test(check)) return 0;
-		else if (/ OOOOO |XOOOOO | OOOOOX|OOOOOO/.test(check)) return 1;
+		if (/ XXXXX |OXXXXX | XXXXXO|OXXXXX /.test(check)) return 0;
+		else if (/ OOOOO |XOOOOO | OOOOOX|XOOOOO /.test(check)) return 1;
 		else return null;
 	}
 
