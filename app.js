@@ -48,14 +48,12 @@ angular
 	};
 
 		/* Player sign */
-	var signs = ['X','O'],
-		/* Expose to scope */
-		player = $scope.player = 0;
+	var signs = ['X','O'];
 
 	/* Join a room with specified sign */
 	function joinAs(room, sign){
 		/* Local reassignments */
-		$scope.player = player = sign;
+		$scope.player = sign;
 		/* Taking the slot */
 		room.$child('player'+sign).$set('true');
 		/* Taking turn */
@@ -97,20 +95,15 @@ angular
 			"https://kokaro.firebaseio.com/room/"+
 			$routeParams.roomId
 		)).$on('loaded', function(){
-			/* Reset if gameover */
-			if (room.winner) {
-				$scope.newGame(room);
-			} else {
-				/* Join the room if a slot is opened */
-				if (!room.player0)		joinAs(room, 0)
-				else if (!room.player1) joinAs(room, 1)
-				/* Create a new room if the room is full */
-				else return $scope.newRoom();
-				/* If it's a new room, populate a board */
-				if (!room.board) room.$update({
-					board: defaultBoard
-				});
-			}
+			/* Join the room if a slot is opened */
+			if (!room.player0)		joinAs(room, 0)
+			else if (!room.player1) joinAs(room, 1)
+			/* Create a new room if the room is full */
+			else return $scope.newRoom();
+			/* If it's a new room, populate a board */
+			if (!room.board) room.$update({
+				board: defaultBoard
+			});
 			/* Expose to the scope */
 			$scope.room = room;
 			$scope.roomId = $routeParams.roomId;
@@ -131,7 +124,7 @@ angular
 
 	/* Check if the current cell is played by the enemy */
 	$scope.cellIsEnemy = function(cell){
-		return signs[player] !== cell;
+		return signs[$scope.player] !== cell;
 	};
 
 	/* Update the container size as the board extends */
@@ -144,11 +137,11 @@ angular
 
 	$scope.onTurn = function(){
 		if ($scope.room.winner) return $scope.haveWon();
-		else return $scope.room.turn === player;
+		else return $scope.room.turn === $scope.player;
 	};
 
 	$scope.haveWon = function(){
-		return $scope.room.winner === signs[player];
+		return $scope.room.winner === signs[$scope.player];
 	};
 
 	/*---------------------------------*/
@@ -242,7 +235,8 @@ angular
 		var room = $scope.room,
 			board = room.board,
 			turn = room.turn,
-			winner = room.winner;
+			winner = room.winner,
+			player = $scope.player;
 		/* Play the cell */
 			/* IF: It's the turn to play */
 		if (turn===player&&
